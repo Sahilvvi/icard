@@ -59,8 +59,8 @@ export function Hero() {
         </div>
       </div>
 
-      <div className="container-x relative grid min-h-[100svh] items-center gap-12 lg:grid-cols-[1.05fr_1fr] lg:gap-6">
-        <div className="hero-text relative z-10 max-w-[720px] pb-10 lg:py-28">
+      <div className="container-x relative grid min-h-[100svh] items-center gap-4 pb-8 sm:gap-8 lg:grid-cols-[1.05fr_1fr] lg:gap-6 lg:pb-0">
+        <div className="hero-text relative z-10 max-w-[720px] lg:py-28">
           <p className="hero-copy micro mb-6 flex items-center gap-3 text-graphite">
             <span className="reg-mark">
               <span />
@@ -99,7 +99,7 @@ export function Hero() {
           </div>
         </div>
 
-        <div className="relative h-[52vh] min-h-[380px] lg:h-[100svh] lg:min-h-0">
+        <div className="relative h-[46vh] min-h-[340px] max-h-[520px] lg:h-[100svh] lg:min-h-0 lg:max-h-none">
           {webgl ? (
             <HeroScene scroll={scroll} />
           ) : (

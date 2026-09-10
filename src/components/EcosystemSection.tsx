@@ -119,7 +119,7 @@ export function EcosystemSection() {
           </div>
 
           {/* Right: panels */}
-          <div className="relative flex flex-col gap-16 lg:block lg:h-full">
+          <div className="relative flex flex-col gap-8 lg:block lg:h-full">
             {pillars.map((p, i) => {
               const t = TONES[p.tone];
               return (
@@ -129,7 +129,7 @@ export function EcosystemSection() {
                   data-active={i === active}
                   style={{ willChange: "clip-path" }}
                 >
-                  <div className="grid gap-6 lg:grid-cols-[1fr_1.15fr] lg:gap-8 lg:rounded-2xl lg:p-8" style={{ background: t.bg, color: t.fg }}>
+                  <div className="grid gap-6 rounded-2xl p-5 sm:p-7 lg:grid-cols-[1fr_1.15fr] lg:gap-8 lg:p-8" style={{ background: t.bg, color: t.fg, boxShadow: `inset 0 0 0 1px ${t.line}` }}>
                     <div className="order-2 flex flex-col justify-between lg:order-1">
                       <div>
                         <div className="eco-in micro flex items-center gap-3" style={{ color: t.sub }}>
@@ -153,7 +153,7 @@ export function EcosystemSection() {
                       </ul>
                     </div>
                     <div className="eco-in order-1 overflow-hidden rounded-xl lg:order-2 lg:aspect-auto lg:min-h-[420px]" style={{ boxShadow: "0 30px 60px -30px rgba(0,0,0,0.5)" }}>
-                      <div className="eco-media h-full min-h-[260px] w-full will-change-transform">
+                      <div className="eco-media aspect-[16/10] w-full will-change-transform sm:aspect-[16/9] lg:aspect-auto lg:h-full lg:min-h-[420px]">
                         <AssetImage src={p.asset} alt={p.assetAlt} tone={p.tone === "ivory" ? "light" : "dark"} />
                       </div>
                     </div>

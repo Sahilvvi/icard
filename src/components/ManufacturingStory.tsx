@@ -43,14 +43,14 @@ export function ManufacturingStory() {
         {story.steps.map((s) => (
           <div key={s.index} className="ms-img absolute inset-0" style={{ willChange: "clip-path" }}>
             <div className="ms-inner h-full w-full will-change-transform">
-              <AssetImage src={s.asset} alt={s.alt} tone="dark" />
+              <AssetImage src={s.asset} alt={s.alt} tone="dark" caption="none" />
             </div>
           </div>
         ))}
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-ink/85 via-ink/40 to-ink/10" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-ink/70 via-ink/40 to-ink/85 lg:bg-gradient-to-r lg:from-ink/85 lg:via-ink/40 lg:to-ink/10" />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-ink to-transparent" />
 
-        <div className="container-x relative flex h-full flex-col justify-between py-24 sm:py-28">
+        <div className="container-x relative flex h-full flex-col justify-between py-20 sm:py-28">
           <div className="micro flex items-center gap-4 text-ivory/60">
             <span className="reg-mark">
               <span />

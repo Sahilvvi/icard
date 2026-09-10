@@ -41,8 +41,6 @@ export function Product3DViewer() {
     return () => el?.removeEventListener("keydown", onKey);
   }, [active]);
 
-  const radius = 520;
-
   return (
     <section aria-labelledby="p3d-title" className="relative overflow-hidden border-y border-line bg-cream py-20 sm:py-28">
       <div className="container-x mb-10 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
@@ -79,8 +77,7 @@ export function Product3DViewer() {
       </div>
 
       <div
-        className="relative mx-auto h-[380px] w-full max-w-[1100px] outline-none sm:h-[440px]"
-        style={{ perspective: "1400px" }}
+        className="relative mx-auto h-[400px] w-full max-w-[1100px] outline-none [--ring-r:300px] [perspective:1800px] sm:h-[460px] sm:[--ring-r:400px] lg:[--ring-r:520px] lg:[perspective:1400px]"
         tabIndex={0}
         role="group"
         aria-roledescription="carousel"
@@ -97,9 +94,9 @@ export function Product3DViewer() {
                 aria-hidden={!isActive}
                 onClick={() => rotateTo(i)}
                 data-cursor={isActive ? undefined : "view"}
-                className="absolute left-0 top-0 w-[220px] -translate-x-1/2 -translate-y-1/2 sm:w-[260px]"
+                className="absolute left-0 top-0 w-[180px] sm:w-[230px] lg:w-[260px]"
                 style={{
-                  transform: `translate(-50%,-50%) rotateY(${i * STEP}deg) translateZ(${radius}px)`,
+                  transform: `translate(-50%,-50%) rotateY(${i * STEP}deg) translateZ(var(--ring-r))`,
                   filter: dist >= 2 ? `blur(${Math.min(3, (dist - 1) * 1.2)}px)` : "none",
                   opacity: dist >= 3 ? 0.35 : 1,
                   transition: "filter 0.6s var(--ease-out-expo), opacity 0.6s var(--ease-out-expo)",

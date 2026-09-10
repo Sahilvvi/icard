@@ -9,6 +9,8 @@ type Props = {
   tone?: "light" | "dark";
   priority?: boolean;
   sizes?: string;
+  /** Where the placeholder label sits; use "top"/"none" when the caller overlays content on the bottom edge. */
+  caption?: "bottom" | "top" | "none";
 };
 
 /**
@@ -17,7 +19,7 @@ type Props = {
  * "proof sheet" placeholder that names the file and describes the intended shot
  * (see ASSETS.md).
  */
-export function AssetImage({ src, alt, className = "", tone = "light", priority = false, sizes = "100vw" }: Props) {
+export function AssetImage({ src, alt, className = "", tone = "light", priority = false, sizes = "100vw", caption = "bottom" }: Props) {
   const [missing, setMissing] = useState(false);
   const img = useRef<HTMLImageElement>(null);
   const file = src.split("/").pop();
@@ -34,7 +36,7 @@ export function AssetImage({ src, alt, className = "", tone = "light", priority 
       <div
         role="img"
         aria-label={alt}
-        className={`grain relative flex h-full w-full items-end overflow-hidden ${dark ? "bg-charcoal text-ivory grain-dark" : "bg-cream text-ink"} ${className}`}
+        className={`grain relative flex h-full w-full overflow-hidden ${caption === "top" ? "items-start" : "items-end"} ${dark ? "bg-charcoal text-ivory grain-dark" : "bg-cream text-ink"} ${className}`}
       >
         <div
           className="absolute inset-0 opacity-[0.35]"
@@ -48,11 +50,13 @@ export function AssetImage({ src, alt, className = "", tone = "light", priority 
         <span className="reg-mark absolute right-4 top-4 opacity-60">
           <span />
         </span>
-        <div className="relative z-10 w-full p-4 sm:p-5">
-          <p className="micro opacity-60">Photography · pending</p>
-          <p className="mt-1 font-mono text-[11px] sm:text-xs break-all opacity-90">{file}</p>
-          <p className="mt-2 max-w-md text-[12px] sm:text-[13px] leading-snug opacity-75">{alt}</p>
-        </div>
+        {caption !== "none" && (
+          <div className={`relative z-10 w-full p-4 sm:p-5 ${caption === "top" ? "pt-10 sm:pt-11" : ""}`}>
+            <p className="micro opacity-60">Photography · pending</p>
+            <p className="mt-1 font-mono text-[11px] sm:text-xs break-all opacity-90">{file}</p>
+            <p className="mt-2 max-w-md text-[12px] sm:text-[13px] leading-snug opacity-75">{alt}</p>
+          </div>
+        )}
       </div>
     );
   }
