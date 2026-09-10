@@ -1,36 +1,60 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# IvyPrints — website
 
-## Getting Started
-
-First, run the development server:
+Marketing site for IvyPrints, "India's Fastest ID Card Printing & B2B Printing
+Ecosystem". Next.js 16 (App Router) · React 19 · TypeScript · Tailwind v4 ·
+GSAP + ScrollTrigger · Lenis · React Three Fiber.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev        # http://localhost:3000
+npm run lint
+npm run typecheck
+npm run build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Structure
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+src/
+  app/            layout (fonts, metadata, JSON-LD), page (section order), globals.css (design tokens)
+  lib/content.ts  ALL copy, numbers and asset paths (from the IvyPrints reference PDF)
+  lib/motion.ts   GSAP registration, useGsap scoped hook, reduced-motion / pointer helpers
+  components/     one file per section, ui/ primitives, three/ hero scene
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Content lives only in `src/lib/content.ts`; components are presentation.
+Missing photography is documented in [ASSETS.md](./ASSETS.md) and rendered as
+labelled placeholders until supplied.
 
-## Learn More
+## Motion system
 
-To learn more about Next.js, take a look at the following resources:
+All animation goes through `useGsap()` (`src/lib/motion.ts`), which scopes a
+`gsap.context`, exposes a `gsap.matchMedia` instance and a `reduced` flag, and
+reverts everything on unmount. Lenis drives smooth scroll and feeds
+`ScrollTrigger.update`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Section | Desktop | Mobile / reduced motion |
+| --- | --- | --- |
+| Loader | Registration lines + wordmark assemble, compress, curtain lifts (~2.6s, once per session) | Skipped |
+| Hero | R3F scene: cards assemble from off-screen, float, react to pointer, separate on scroll | CSS card stack with light parallax; no WebGL |
+| Trust metrics | Count-up on enter | Static values |
+| Marquee | Two rows, opposite directions, hover pauses | Same (CSS) |
+| Ecosystem | Stage pinned for 3.4 viewports; panels wipe in via `clip-path`, section colour shifts | Stacked, fade-in |
+| Products | Pinned; vertical scroll → horizontal track, centre card scales, hover tilt | Native horizontal swipe |
+| 3D carousel | DOM `preserve-3d` ring, arrows / keyboard / dots | Same |
+| Partnership | Tabs; panel clip-path + scale transition | Same, tabs scroll horizontally |
+| Story | Sticky viewport, images wipe as steps advance | Same (sticky is cheap) |
+| Industries | Tabs; image wipe, staggered stats | Same |
+| Card anatomy | Pointer tilt; feature focus moves "camera" (translate/scale/rotateY) and shows layer overlays | Tap labels; no tilt |
+| Proof stats | Masked number reveal, scanning line, drifting grid | Static |
+| CTA | Materials fly in and assemble, light scroll parallax | Fade-in |
+| FAQ | Grid-row height accordion, plus→minus | Same |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Custom cursor (`data-cursor="button|view|drag"`) and magnetic buttons are
+enabled only for fine pointers without `prefers-reduced-motion`.
 
-## Deploy on Vercel
+## Contact form
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Client-side only for now: the submit handler simulates a request and shows the
+success state. Wire `onSubmit` in `src/components/ContactForm.tsx` to an API
+route / CRM when ready.
