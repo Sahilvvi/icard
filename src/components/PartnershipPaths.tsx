@@ -82,12 +82,11 @@ export function PartnershipPaths() {
             <div className="relative overflow-hidden rounded-2xl bg-charcoal text-ivory" style={{ boxShadow: "0 40px 80px -40px rgba(22,20,26,0.6)" }}>
               <div className="pp-img relative aspect-[16/10] overflow-hidden sm:aspect-[16/9]" style={{ willChange: "clip-path, transform" }}>
                 <div className="pp-img-parallax h-[112%] w-full">
-                  <AssetImage src={p.asset} alt={p.assetAlt} tone="dark" />
+                  <AssetImage src={p.asset} alt={p.assetAlt} tone="dark" caption="top" />
                 </div>
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/20 to-transparent" />
-                <p className="micro absolute left-6 top-6 text-ivory/70">{p.nav}</p>
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-charcoal to-transparent" />
               </div>
-              <div className="relative -mt-16 grid gap-6 p-6 sm:p-8 lg:grid-cols-[1.1fr_0.9fr]">
+              <div className="relative grid gap-6 p-6 sm:p-8 lg:grid-cols-[1.1fr_0.9fr]">
                 <div>
                   <h3 className="pp-in h-sub">{p.title}</h3>
                   <p className="pp-in mt-4 text-[15px] leading-relaxed text-ivory/70">{p.body}</p>

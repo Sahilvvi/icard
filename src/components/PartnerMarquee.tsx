@@ -1,10 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { partnerLogos } from "@/lib/content";
 
 function LogoMark({ src, alt, i }: { src: string; alt: string; i: number }) {
   const [missing, setMissing] = useState(false);
+  const img = useRef<HTMLImageElement>(null);
+  useEffect(() => {
+    const el = img.current;
+    if (el && el.complete && el.naturalWidth === 0) setMissing(true);
+  }, [src]);
   return (
     <li className="group flex h-16 w-40 shrink-0 items-center justify-center px-6 opacity-45 grayscale transition-[opacity,filter] duration-500 hover:opacity-100 hover:grayscale-0">
       {missing ? (
@@ -16,7 +21,7 @@ function LogoMark({ src, alt, i }: { src: string; alt: string; i: number }) {
         </span>
       ) : (
         // eslint-disable-next-line @next/next/no-img-element
-        <img src={src} alt={alt} loading="lazy" onError={() => setMissing(true)} className="max-h-10 w-auto object-contain" />
+        <img ref={img} src={src} alt={alt} loading="lazy" onError={() => setMissing(true)} className="max-h-10 w-auto object-contain" />
       )}
     </li>
   );

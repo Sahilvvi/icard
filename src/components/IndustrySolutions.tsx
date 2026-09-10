@@ -70,15 +70,14 @@ export function IndustrySolutions() {
             <div className="card-surface overflow-hidden !rounded-2xl">
               <div className="is-img relative aspect-[16/9] overflow-hidden bg-charcoal text-ivory" style={{ willChange: "clip-path, transform" }}>
                 <AssetImage src={tab.asset} alt={tab.assetAlt} tone="dark" />
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/80 to-transparent" />
-                <div className="absolute inset-x-0 bottom-0 flex flex-wrap gap-8 p-6 sm:p-8">
-                  {tab.stats.map((s) => (
-                    <div key={s.label} className="is-stat">
-                      <p className="font-display text-4xl font-bold tracking-[-0.03em] text-coral sm:text-5xl">{s.value}</p>
-                      <p className="micro mt-1 text-ivory/70">{s.label}</p>
-                    </div>
-                  ))}
-                </div>
+              </div>
+              <div className="grid grid-cols-2 divide-x divide-ivory/10 bg-charcoal text-ivory">
+                {tab.stats.map((s) => (
+                  <div key={s.label} className="is-stat px-6 py-5 sm:px-8 sm:py-6">
+                    <p className="font-display text-3xl font-bold tracking-[-0.03em] text-coral sm:text-5xl">{s.value}</p>
+                    <p className="micro mt-1 text-ivory/70">{s.label}</p>
+                  </div>
+                ))}
               </div>
 
               <div className="grid gap-8 p-6 sm:p-8 lg:grid-cols-[1.2fr_0.8fr]">

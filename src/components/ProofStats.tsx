@@ -50,7 +50,7 @@ export function ProofStats() {
           {proofStats.map((s, i) => (
             <div key={s.label} className={`relative ${i > 0 ? "md:border-l md:border-ivory/10 md:pl-8" : ""}`}>
               <div className="overflow-hidden">
-                <p className="ps-num font-display text-[clamp(64px,10vw,152px)] font-bold leading-[0.9] tracking-[-0.05em]">
+                <p className="ps-num font-display text-[clamp(60px,7.4vw,136px)] font-bold leading-[0.9] tracking-[-0.05em]">
                   {s.value.replace(/[^0-9]/g, "")}
                   <span className="text-coral">{s.value.replace(/[0-9]/g, "")}</span>
                 </p>

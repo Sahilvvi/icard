@@ -2,7 +2,7 @@
 
 import { Canvas, useFrame } from "@react-three/fiber";
 import { ContactShadows, RoundedBox } from "@react-three/drei";
-import { useMemo, useRef, type RefObject } from "react";
+import { useEffect, useMemo, useRef, useState, type RefObject } from "react";
 import * as THREE from "three";
 import { makeCardTexture, PALETTES } from "./cardTexture";
 import { gsap } from "@/lib/motion";
@@ -57,7 +57,7 @@ function Card({ cfg, assembled, scroll }: { cfg: CardCfg; assembled: RefObject<n
 
   return (
     <group ref={group}>
-      <RoundedBox args={[CARD_W, CARD_H, CARD_D]} radius={0.09} smoothness={6} castShadow>
+      <RoundedBox args={[CARD_W, CARD_H, CARD_D]} radius={0.09} smoothness={4}>
         <meshPhysicalMaterial color="#f3eee4" roughness={0.45} clearcoat={0.8} clearcoatRoughness={0.25} />
       </RoundedBox>
       <mesh position={[0, 0, CARD_D / 2 + 0.001]}>
@@ -139,28 +139,40 @@ function Rig({ children, scroll }: { children: React.ReactNode; scroll: RefObjec
 
 export default function HeroScene({ scroll }: { scroll: RefObject<number> }) {
   const assembled = useRef(0);
+  const wrap = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(true);
+
+  useEffect(() => {
+    const el = wrap.current;
+    if (!el) return;
+    const io = new IntersectionObserver(([e]) => setVisible(e.isIntersecting), { threshold: 0 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
 
   return (
+    <div ref={wrap} className="absolute inset-0">
     <Canvas
-      dpr={[1, 1.5]}
-      camera={{ position: [0, 0, 9], fov: 32 }}
+      dpr={[1, 1.25]}
+      frameloop={visible ? "always" : "never"}
+      camera={{ position: [0, 0, 15], fov: 32 }}
       gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
-      shadows
       onCreated={() => {
         gsap.to(assembled, { current: 1, duration: 2.2, ease: "expo.out", delay: 0.2 });
       }}
       className="!absolute inset-0"
     >
       <ambientLight intensity={0.9} />
-      <directionalLight position={[4, 6, 6]} intensity={2.2} castShadow shadow-mapSize={[1024, 1024]} />
+      <directionalLight position={[4, 6, 6]} intensity={2.2} />
       <directionalLight position={[-6, 2, 3]} intensity={0.6} color="#ffe2d1" />
       <Rig scroll={scroll}>
         <Sheets scroll={scroll} />
         {CARDS.map((c) => (
           <Card key={c.palette} cfg={c} assembled={assembled} scroll={scroll} />
         ))}
-        <ContactShadows position={[0, -3.1, 0]} opacity={0.35} scale={14} blur={2.6} far={5} color="#16141a" />
+        <ContactShadows position={[0, -3.1, 0]} opacity={0.35} scale={14} blur={2.6} far={5} resolution={256} frames={60} color="#16141a" />
       </Rig>
     </Canvas>
+    </div>
   );
 }
