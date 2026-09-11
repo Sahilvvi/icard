@@ -9,10 +9,14 @@ import { Eyebrow } from "./ui/SectionHeader";
 const ITEMS = products.items.slice(0, 8);
 const N = ITEMS.length;
 const STEP = 360 / N;
+const AUTOPLAY_MS = 2800;
 
 export function Product3DViewer() {
   const ring = useRef<HTMLDivElement>(null);
+  const stage = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const [inView, setInView] = useState(false);
   const angle = useRef(0);
 
   const rotateTo = (i: number) => {
@@ -40,6 +44,20 @@ export function Product3DViewer() {
     el?.addEventListener("keydown", onKey);
     return () => el?.removeEventListener("keydown", onKey);
   }, [active]);
+
+  useEffect(() => {
+    const el = stage.current;
+    if (!el) return;
+    const io = new IntersectionObserver(([e]) => setInView(e.isIntersecting), { threshold: 0.3 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (paused || !inView || prefersReducedMotion()) return;
+    const t = window.setInterval(() => rotateTo(active + 1), AUTOPLAY_MS);
+    return () => window.clearInterval(t);
+  }, [active, paused, inView]);
 
   return (
     <section aria-labelledby="p3d-title" className="relative overflow-hidden border-y border-line bg-cream py-20 sm:py-28">
@@ -77,8 +95,15 @@ export function Product3DViewer() {
       </div>
 
       <div
+        ref={stage}
         className="relative mx-auto h-[400px] w-full max-w-[1100px] outline-none [--ring-r:300px] [perspective:1800px] sm:h-[460px] sm:[--ring-r:400px] lg:[--ring-r:520px] lg:[perspective:1400px]"
         tabIndex={0}
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+        onFocus={() => setPaused(true)}
+        onBlur={() => setPaused(false)}
+        onTouchStart={() => setPaused(true)}
+        onTouchEnd={() => setPaused(false)}
         role="group"
         aria-roledescription="carousel"
         aria-label="Product categories"

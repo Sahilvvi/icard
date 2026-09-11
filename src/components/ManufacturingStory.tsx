@@ -5,6 +5,11 @@ import { story } from "@/lib/content";
 import { gsap, useGsap } from "@/lib/motion";
 import { AssetImage } from "./ui/AssetImage";
 
+/** Extra scroll (in step units) held at the start and end so the first and last steps are readable. */
+const HOLD = 1;
+/** Scroll distance per step, in viewport heights. */
+const STEP_VH = 140;
+
 export function ManufacturingStory() {
   const [active, setActive] = useState(0);
   const n = story.steps.length;
@@ -20,25 +25,28 @@ export function ManufacturingStory() {
         start: "top top",
         end: "bottom bottom",
         scrub: reduced ? true : 0.5,
+        invalidateOnRefresh: true,
         onUpdate: (self) => {
-          const i = Math.min(n - 1, Math.floor(self.progress * n));
+          const i = Math.min(n - 1, Math.floor(Math.max(0, self.progress * (n + HOLD) - HOLD / 2)));
           setActive((a) => (a === i ? a : i));
         },
       },
     });
+    tl.to({}, { duration: HOLD / 2 });
     imgs.forEach((img, i) => {
       if (i === 0) return;
-      tl.to(imgs[i - 1].querySelector(".ms-inner"), { scale: 1.1, duration: 1, ease: "none" }, i - 1)
-        .to(img, { clipPath: "inset(0 0 0% 0)", duration: 1, ease: "none" }, i - 1)
-        .fromTo(img.querySelector(".ms-inner"), { yPercent: 12, scale: 1.05 }, { yPercent: 0, scale: 1, duration: 1, ease: "none" }, i - 1);
+      const at = HOLD / 2 + (i - 1);
+      tl.to(imgs[i - 1].querySelector(".ms-inner"), { scale: 1.1, duration: 1, ease: "none" }, at)
+        .to(img, { clipPath: "inset(0 0 0% 0)", duration: 1, ease: "none" }, at)
+        .fromTo(img.querySelector(".ms-inner"), { yPercent: 12, scale: 1.05 }, { yPercent: 0, scale: 1, duration: 1, ease: "none" }, at);
     });
-    tl.to({}, { duration: 1 });
+    tl.to({}, { duration: 1 + HOLD / 2 });
   }, []);
 
   const step = story.steps[active];
 
   return (
-    <section id="story" ref={scope} className="relative bg-ink text-ivory" style={{ height: `${n * 100}vh` }} aria-label="Manufacturing story">
+    <section id="story" ref={scope} className="relative bg-ink text-ivory" style={{ height: `${(n + HOLD) * STEP_VH}vh` }} aria-label="Manufacturing story">
       <div className="sticky top-0 h-screen overflow-hidden">
         {story.steps.map((s) => (
           <div key={s.index} className="ms-img absolute inset-0" style={{ willChange: "clip-path" }}>

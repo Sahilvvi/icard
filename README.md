@@ -1,6 +1,6 @@
-# IvyPrints — website
+# IDCARD — website
 
-Marketing site for IvyPrints, "India's Fastest ID Card Printing & B2B Printing
+Marketing site for IDCARD, "India's Fastest ID Card Printing & B2B Printing
 Ecosystem". Next.js 16 (App Router) · React 19 · TypeScript · Tailwind v4 ·
 GSAP + ScrollTrigger · Lenis · React Three Fiber.
 
@@ -17,7 +17,7 @@ npm run build
 ```
 src/
   app/            layout (fonts, metadata, JSON-LD), page (section order), globals.css (design tokens)
-  lib/content.ts  ALL copy, numbers and asset paths (from the IvyPrints reference PDF)
+  lib/content.ts  ALL copy, numbers and asset paths (from the IDCARD reference PDF)
   lib/motion.ts   GSAP registration, useGsap scoped hook, reduced-motion / pointer helpers
   components/     one file per section, ui/ primitives, three/ hero scene
 ```

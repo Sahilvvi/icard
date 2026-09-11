@@ -13,7 +13,7 @@ edge, ≤ 350 KB each) and they appear automatically — no code change needed.
 
 | Path | Used in | Intended content |
 | --- | --- | --- |
-| `assets/og-ivyprints.webp` (1200×630) | `layout.tsx` Open Graph / Twitter | Printed IvyPrints ID cards with lanyard on ivory background, wordmark bottom-left |
+| `assets/og-idcard.webp` (1200×630) | `layout.tsx` Open Graph / Twitter | Printed IDCARD ID cards with lanyard on ivory background, wordmark bottom-left |
 
 The hero itself is rendered procedurally (Three.js cards with canvas textures;
 CSS fallback), so no hero photo is required.
@@ -22,7 +22,7 @@ CSS fallback), so no hero photo is required.
 
 | Path | Intended content |
 | --- | --- |
-| `assets/raw-materials.webp` | PVC sheets, clips and lanyard rolls stacked in an IvyPrints warehouse |
+| `assets/raw-materials.webp` | PVC sheets, clips and lanyard rolls stacked in an IDCARD warehouse |
 | `assets/software-platform.webp` | Order / plant management dashboard on a laptop, production floor behind |
 | `assets/printing-production.webp` | Finished ID cards being packed, cartons labelled for dispatch |
 
@@ -39,7 +39,7 @@ top-left light, slight shadow. One per category:
 
 | Path | Intended content |
 | --- | --- |
-| `assets/partner-workspace.webp` | Printing vendor at a workstation using the IvyPrints app |
+| `assets/partner-workspace.webp` | Printing vendor at a workstation using the IDCARD app |
 | `assets/warehouse.webp` | Raw-material warehouse racks with PVC sheet cartons |
 | `assets/production-floor.webp` | Card printers running on a partner production floor |
 

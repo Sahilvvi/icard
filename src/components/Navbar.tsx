@@ -7,14 +7,14 @@ import { getLenis } from "./SmoothScroll";
 
 export function Logo({ className = "" }: { className?: string }) {
   return (
-    <a href="#top" aria-label="IvyPrints home" className={`flex items-center gap-2.5 ${className}`}>
+    <a href="#top" aria-label="IDCARD home" className={`flex items-center gap-2.5 ${className}`}>
       <span className="relative grid size-8 place-items-center overflow-hidden rounded-[6px] bg-purple text-ivory">
         <span className="absolute inset-[3px] rounded-[3px] border border-ivory/40" />
         <span className="absolute left-[7px] top-[8px] h-[3px] w-[10px] rounded-sm bg-coral" />
         <span className="absolute bottom-[7px] left-[7px] h-px w-[14px] bg-ivory/70" />
         <span className="absolute bottom-[10px] left-[7px] h-px w-[9px] bg-ivory/70" />
       </span>
-      <span className="font-display text-[15px] font-bold tracking-[0.08em]">IVYPRINTS</span>
+      <span className="font-display text-[15px] font-bold tracking-[0.08em]">IDCARD</span>
     </a>
   );
 }

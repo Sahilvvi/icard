@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { gsap, prefersReducedMotion, useClientValue, useGsap } from "@/lib/motion";
 
-const SESSION_KEY = "ivy-loaded";
+const SESSION_KEY = "idcard-loaded";
 const readSkip = () => prefersReducedMotion() || sessionStorage.getItem(SESSION_KEY) !== null;
 
 /**
@@ -64,7 +64,7 @@ export function Loader() {
       ))}
       <div className="absolute inset-0 flex items-center justify-center">
         <div className="ld-word flex overflow-hidden font-display text-[12vw] sm:text-[8vw] font-bold leading-none tracking-[-0.04em]">
-          {"IVYPRINTS".split("").map((l, i) => (
+          {"IDCARD".split("").map((l, i) => (
             <span key={i} className="ld-letter inline-block">
               {l}
             </span>
