@@ -67,12 +67,6 @@ export function Hero() {
 
       <div className="container-x relative grid min-h-[100svh] items-center gap-4 pb-8 sm:gap-8 lg:grid-cols-[1.05fr_1fr] lg:gap-6 lg:pb-0">
         <div className="hero-text relative z-10 max-w-[720px] lg:py-28">
-          <p className="hero-copy micro mb-6 flex items-center gap-3 text-graphite">
-            <span className="reg-mark">
-              <span />
-            </span>
-            {hero.sub}
-          </p>
           <h1 id="hero-title" className="display !text-[clamp(2.5rem,6.2vw,5.6rem)]">
             {hero.lines.map((l) => (
               <span key={l.text} className="block overflow-hidden pb-[0.06em] -mb-[0.06em]">

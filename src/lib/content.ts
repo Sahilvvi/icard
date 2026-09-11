@@ -24,7 +24,6 @@ export const hero = {
     { text: "ID CARD PRINTING", accent: true },
     { text: "& B2B ECOSYSTEM", accent: false },
   ],
-  sub: "A Complete B2B Printing Ecosystem for Schools, Corporates & Vendors",
   body:
     "IDCARD is a technology-driven B2B printing platform that simplifies bulk printing across India. From quality-checked raw materials and smart software to high-volume ID card printing, we help you manage printing at scale—transparently and efficiently.",
   primaryCta: "Get Started",
