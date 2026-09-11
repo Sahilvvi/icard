@@ -24,10 +24,10 @@ type Props = {
 /** DOM rendition of a printed 0.76mm PVC card (CR80 proportions). */
 export function IDCard({
   theme = "purple",
-  org = "IVYPRINTS",
+  org = "IDCARD",
   role = "Student",
   name = "A. Sharma",
-  id = "IVY-2026-0418",
+  id = "IDC-2026-0418",
   chip = false,
   className = "",
   style,

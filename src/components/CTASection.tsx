@@ -81,7 +81,7 @@ export function CTASection() {
           </svg>
           {/* card */}
           <div className="cta-piece absolute bottom-[4%] right-[4%] w-[62%] text-[clamp(10px,1.4vw,15px)]" style={{ transform: "rotate(8deg)" }}>
-            <IDCard theme="coral" chip role="Partner" name="Your Business" id="IVY-PARTNER" />
+            <IDCard theme="coral" chip role="Partner" name="Your Business" id="IDC-PARTNER" />
           </div>
         </div>
       </div>

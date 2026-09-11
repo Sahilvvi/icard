@@ -2,7 +2,7 @@
 
 import { useRef, useState, type MouseEvent } from "react";
 import { products } from "@/lib/content";
-import { gsap, isFinePointer, prefersReducedMotion, useGsap } from "@/lib/motion";
+import { gsap, isFinePointer, prefersReducedMotion, ScrollTrigger, useGsap } from "@/lib/motion";
 import { AssetImage } from "./ui/AssetImage";
 import { SectionHeader } from "./ui/SectionHeader";
 
@@ -23,7 +23,7 @@ function ProductCard({ item, index }: { item: (typeof products.items)[number]; i
       data-cursor="view"
       onMouseMove={onMove}
       onMouseLeave={onLeave}
-      className="pc-card group relative w-[72vw] shrink-0 snap-center sm:w-[380px] lg:w-[min(400px,40vh)] preserve-3d"
+      className="pc-card group relative w-[72vw] shrink-0 snap-center sm:w-[340px] lg:w-[380px] preserve-3d"
     >
       <div className="card-surface crop relative overflow-hidden text-ink transition-shadow duration-500 group-hover:shadow-[0_30px_60px_-24px_rgba(22,20,26,0.45)]">
         <div className="relative aspect-[4/5] overflow-hidden bg-cream">
@@ -50,46 +50,14 @@ export function ProductCarousel() {
   const [idx, setIdx] = useState(0);
   const n = products.items.length;
 
-  const scope = useGsap<HTMLElement>(({ scope, reduced, mm }) => {
-    mm.add("(min-width: 1024px)", () => {
-      const track = scope.querySelector<HTMLElement>(".pc-track")!;
-      const stage = scope.querySelector<HTMLElement>(".pc-stage")!;
-      const cards = gsap.utils.toArray<HTMLElement>(".pc-card", scope);
-      const getDist = () => track.scrollWidth - window.innerWidth + 120;
+  const scope = useGsap<HTMLElement>(({ scope, reduced }) => {
+    const track = scope.querySelector<HTMLElement>(".pc-track")!;
+    const viewport = scope.querySelector<HTMLElement>(".pc-viewport")!;
 
-      gsap.to(track, {
-        x: () => -getDist(),
-        ease: "none",
-        scrollTrigger: {
-          trigger: scope,
-          start: "top top",
-          end: () => `+=${getDist() * 1.1}`,
-          pin: stage,
-          anticipatePin: 1,
-          scrub: reduced ? true : 0.8,
-          invalidateOnRefresh: true,
-          onUpdate: (self) => {
-            const i = Math.min(n - 1, Math.round(self.progress * (n - 1)));
-            setIdx((c) => (c === i ? c : i));
-            if (reduced) return;
-            const cx = window.innerWidth / 2;
-            cards.forEach((c) => {
-              const r = c.getBoundingClientRect();
-              const d = Math.abs(r.left + r.width / 2 - cx) / window.innerWidth;
-              const s = 1 - Math.min(0.12, d * 0.24);
-              gsap.set(c, { scale: s, rotateZ: (r.left + r.width / 2 - cx) / window.innerWidth * -1.4 });
-            });
-          },
-        },
-      });
-      gsap.fromTo(".pc-bar", { scaleX: 0 }, { scaleX: 1, ease: "none", scrollTrigger: { trigger: scope, start: "top top", end: () => `+=${getDist() * 1.1}`, scrub: true } });
-    });
-
-    mm.add("(max-width: 1023px)", () => {
-      const track = scope.querySelector<HTMLElement>(".pc-track")!;
+    if (reduced) {
       const onScroll = () => {
-        const cards = Array.from(track.children) as HTMLElement[];
-        const cx = track.scrollLeft + track.clientWidth / 2;
+        const cards = gsap.utils.toArray<HTMLElement>(".pc-card", track).slice(0, n);
+        const cx = viewport.scrollLeft + viewport.clientWidth / 2;
         let best = 0;
         let bd = Infinity;
         cards.forEach((c, i) => {
@@ -101,45 +69,80 @@ export function ProductCarousel() {
         });
         setIdx(best);
       };
-      track.addEventListener("scroll", onScroll, { passive: true });
-      return () => track.removeEventListener("scroll", onScroll);
+      viewport.addEventListener("scroll", onScroll, { passive: true });
+      return () => viewport.removeEventListener("scroll", onScroll);
+    }
+
+    const loop = gsap.to(track, {
+      xPercent: -50,
+      ease: "none",
+      duration: n * 4.5,
+      repeat: -1,
+      onUpdate: () => {
+        const i = Math.floor(loop.progress() * n) % n;
+        setIdx((c) => (c === i ? c : i));
+      },
     });
 
-    if (!reduced) {
-      gsap.from(scope.querySelectorAll("[data-reveal-group] > *"), {
-        y: 30,
-        autoAlpha: 0,
-        stagger: 0.08,
-        duration: 1,
-        scrollTrigger: { trigger: scope, start: "top 75%", once: true },
-      });
-    }
+    const slow = () => gsap.to(loop, { timeScale: 0, duration: 0.6, overwrite: true });
+    const resume = () => gsap.to(loop, { timeScale: 1, duration: 0.8, overwrite: true });
+    viewport.addEventListener("pointerenter", slow);
+    viewport.addEventListener("pointerleave", resume);
+    viewport.addEventListener("focusin", slow);
+    viewport.addEventListener("focusout", resume);
+
+    ScrollTrigger.create({
+      trigger: scope,
+      start: "top bottom",
+      end: "bottom top",
+      onToggle: (self) => (self.isActive ? loop.play() : loop.pause()),
+    });
+
+    gsap.from(scope.querySelectorAll("[data-reveal-group] > *"), {
+      y: 30,
+      autoAlpha: 0,
+      stagger: 0.08,
+      duration: 1,
+      scrollTrigger: { trigger: scope, start: "top 75%", once: true },
+    });
+
+    return () => {
+      viewport.removeEventListener("pointerenter", slow);
+      viewport.removeEventListener("pointerleave", resume);
+      viewport.removeEventListener("focusin", slow);
+      viewport.removeEventListener("focusout", resume);
+    };
   }, []);
 
   return (
-    <section id="products" ref={scope} className="relative bg-ivory">
-      <div className="pc-stage relative bg-ivory lg:flex lg:h-screen lg:flex-col lg:overflow-hidden">
-        <div className="container-x flex flex-col gap-6 pt-20 sm:pt-28 lg:shrink-0 lg:flex-row lg:items-end lg:justify-between lg:pb-4 lg:pt-24">
-          <SectionHeader label={products.label} index="03" title={products.title} accentLine={1} sub={products.sub} />
-          <div className="micro flex items-center gap-4 text-graphite">
-            <span className="text-ink tabular-nums">{String(idx + 1).padStart(2, "0")}</span>
-            <span className="relative h-px w-28 bg-line">
-              <span className="pc-bar absolute inset-0 origin-left bg-coral lg:block" style={{ transform: `scaleX(${(idx + 1) / n})` }} />
-            </span>
-            <span className="tabular-nums">{String(n).padStart(2, "0")}</span>
-            <span className="hidden lg:inline">Products</span>
-          </div>
+    <section id="products" ref={scope} className="relative overflow-hidden bg-ivory pb-20 pt-16 sm:pb-28 sm:pt-20 lg:pt-24">
+      <div className="container-x flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+        <SectionHeader label={products.label} index="03" title={products.title} accentLine={1} sub={products.sub} />
+        <div className="micro flex items-center gap-4 text-graphite">
+          <span className="text-ink tabular-nums">{String(idx + 1).padStart(2, "0")}</span>
+          <span className="relative h-px w-28 bg-line">
+            <span className="pc-bar absolute inset-0 origin-left bg-coral transition-transform duration-500" style={{ transform: `scaleX(${(idx + 1) / n})` }} />
+          </span>
+          <span className="tabular-nums">{String(n).padStart(2, "0")}</span>
+          <span className="hidden lg:inline">Products</span>
         </div>
+      </div>
 
-        <div
-          data-cursor="drag"
-          className="pc-track no-scrollbar mt-8 flex snap-x snap-mandatory gap-5 overflow-x-auto px-5 pb-14 sm:gap-7 sm:px-8 lg:mt-0 lg:min-h-0 lg:flex-1 lg:items-center lg:overflow-visible lg:px-14 lg:pb-0 xl:px-20"
-          style={{ perspective: "1200px" }}
-        >
-          {products.items.map((p, i) => (
-            <ProductCard key={p.id} item={p} index={i} />
+      <div
+        data-cursor="view"
+        className="pc-viewport no-scrollbar mt-10 overflow-hidden motion-reduce:overflow-x-auto sm:mt-14"
+        style={{ perspective: "1200px" }}
+        aria-roledescription="carousel"
+        aria-label="Products"
+      >
+        <div className="pc-track flex w-max motion-reduce:px-5 motion-reduce:sm:px-8">
+          {[0, 1].map((copy) => (
+            <div key={copy} className={copy ? "flex gap-5 pr-5 sm:gap-7 sm:pr-7 motion-reduce:hidden" : "flex gap-5 pr-5 sm:gap-7 sm:pr-7"} aria-hidden={copy === 1}>
+              {products.items.map((p, i) => (
+                <ProductCard key={p.id} item={p} index={i} />
+              ))}
+            </div>
           ))}
-          <div className="w-[14vw] shrink-0 lg:w-[30vw]" aria-hidden />
         </div>
       </div>
     </section>

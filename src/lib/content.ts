@@ -1,18 +1,18 @@
 export const site = {
-  name: "IVYPRINTS",
+  name: "IDCARD",
   tagline: "India's Fastest ID Card Printing & B2B Printing Ecosystem",
-  phone: "+91 8302801966",
-  phoneHref: "tel:+918302801966",
-  email: "contact@ivyprints.in",
-  address: ["Plot No SC-20 B(D),", "O Block, Narayan Vihar,", "Jaipur, Rajasthan 302020"],
+  phone: "+91 00000 00000",
+  phoneHref: "tel:+910000000000",
+  email: "hello@example.com",
+  address: ["123 Sample Street,", "Business District,", "New Delhi, India 110001"],
   location: "India (Multiple Locations)",
-  url: "https://ivyprints.in",
+  url: "https://example.com",
 };
 
 export const nav = [
   { label: "Home", href: "#top" },
   { label: "About", href: "#ecosystem" },
-  { label: "IVY Products", href: "#products" },
+  { label: "IDCARD Products", href: "#products" },
   { label: "Software", href: "#software" },
   { label: "Cities", href: "#story" },
   { label: "Blogs", href: "#faq" },
@@ -26,7 +26,7 @@ export const hero = {
   ],
   sub: "A Complete B2B Printing Ecosystem for Schools, Corporates & Vendors",
   body:
-    "IvyPrints is a technology-driven B2B printing platform that simplifies bulk printing across India. From quality-checked raw materials and smart software to high-volume ID card printing, we help you manage printing at scale—transparently and efficiently.",
+    "IDCARD is a technology-driven B2B printing platform that simplifies bulk printing across India. From quality-checked raw materials and smart software to high-volume ID card printing, we help you manage printing at scale—transparently and efficiently.",
   primaryCta: "Get Started",
   secondaryCta: "Explore Solutions",
   caption: "Quality Control & Fulfilment Network",
@@ -55,7 +55,7 @@ export const ecosystem = {
       eyebrow: "Material",
       title: "Raw Material Supply",
       body:
-        "Access quality-checked printing raw materials at transparent prices, delivered directly from IvyPrints warehouses across India. We eliminate dependency on local suppliers by offering consistent quality, predictable pricing, and reliable logistics.",
+        "Access quality-checked printing raw materials at transparent prices, delivered directly from IDCARD warehouses across India. We eliminate dependency on local suppliers by offering consistent quality, predictable pricing, and reliable logistics.",
       points: [
         "Quality-checked PVC sheets & consumables",
         "Transparent, centralized pricing",
@@ -63,7 +63,7 @@ export const ecosystem = {
         "Fast & reliable delivery timelines",
       ],
       asset: "/assets/raw-materials.webp",
-      assetAlt: "PVC sheets, clips and lanyard rolls stacked in an IvyPrints warehouse",
+      assetAlt: "PVC sheets, clips and lanyard rolls stacked in an IDCARD warehouse",
       tone: "ivory",
     },
     {
@@ -73,7 +73,7 @@ export const ecosystem = {
       badge: "Core platform",
       title: "Software & Technology Platform",
       body:
-        "Our in-house software and mobile tools power every stage of the printing workflow— from order intake and data validation to production tracking and dispatch. IvyPrints technology reduces errors, saves time, and gives complete operational visibility.",
+        "Our in-house software and mobile tools power every stage of the printing workflow— from order intake and data validation to production tracking and dispatch. IDCARD technology reduces errors, saves time, and gives complete operational visibility.",
       points: [
         "Order & plant management system",
         "Mobile app for partners & vendors",
@@ -81,7 +81,7 @@ export const ecosystem = {
         "Automated workflows & reporting",
       ],
       asset: "/assets/software-platform.webp",
-      assetAlt: "IvyPrints order management dashboard and partner mobile app",
+      assetAlt: "IDCARD order management dashboard and partner mobile app",
       tone: "charcoal",
     },
     {
@@ -90,7 +90,7 @@ export const ecosystem = {
       eyebrow: "Production · Quality · Delivery",
       title: "Finished Goods & Fulfilment",
       body:
-        "Leverage IvyPrints' nationwide production and fulfilment network to deliver high-volume printing orders with speed and consistency. Every order undergoes rigorous quality checks before being delivered to the customer.",
+        "Leverage IDCARD's nationwide production and fulfilment network to deliver high-volume printing orders with speed and consistency. Every order undergoes rigorous quality checks before being delivered to the customer.",
       points: [
         "Pan-India production partner network",
         "Standardized quality assurance process",
@@ -106,7 +106,7 @@ export const ecosystem = {
 };
 
 export const products = {
-  label: "IVY Products",
+  label: "IDCARD Products",
   title: ["Unlimited Printing Options.", "One Trusted Platform."],
   sub: "From business essentials to custom marketing materials, access India's largest printing catalogue with guaranteed quality and fast turnaround.",
   items: [
@@ -133,7 +133,7 @@ export const partnershipPaths = {
       nav: "Vendor / Entrepreneur",
       title: "Are You a Vendor or Entrepreneur?",
       body:
-        "Whether you're starting a new printing business or scaling an existing one, IvyPrints provides the supply chain, technology, and operational support needed to grow confidently.",
+        "Whether you're starting a new printing business or scaling an existing one, IDCARD provides the supply chain, technology, and operational support needed to grow confidently.",
       points: [
         "Nationwide backend printing & fulfilment",
         "Raw materials at factory-direct prices",
@@ -150,7 +150,7 @@ export const partnershipPaths = {
       badge: "Most recommended",
       title: "Looking for Raw Material Supply?",
       body:
-        "Source quality-checked printing raw materials from a centralized, transparent system. IvyPrints eliminates dependency on unverified local suppliers with predictable pricing.",
+        "Source quality-checked printing raw materials from a centralized, transparent system. IDCARD eliminates dependency on unverified local suppliers with predictable pricing.",
       points: [
         "Quality-checked PVC sheets & consumables",
         "Transparent pricing, no hidden margins",
@@ -166,7 +166,7 @@ export const partnershipPaths = {
       nav: "Production Partner",
       title: "Need a Production Partner?",
       body:
-        "Join IvyPrints' nationwide production network and receive consistent, high-volume orders with standardized workflows and clear quality benchmarks.",
+        "Join IDCARD's nationwide production network and receive consistent, high-volume orders with standardized workflows and clear quality benchmarks.",
       points: [
         "Steady inflow of bulk printing orders",
         "Standardized production & QC processes",
@@ -201,7 +201,7 @@ export const industries = {
       kicker: "Schools & Coachings",
       title: "ID Card Solutions for Educational Institutions",
       body:
-        "IvyPrints specializes in bulk ID card printing for schools, colleges, universities, and coaching institutes with technology-driven production, standardized quality, and fast delivery across India.",
+        "IDCARD specializes in bulk ID card printing for schools, colleges, universities, and coaching institutes with technology-driven production, standardized quality, and fast delivery across India.",
       stats: [
         { value: "500+", label: "Schools & Colleges" },
         { value: "1M+", label: "ID Cards Printed" },
@@ -231,7 +231,7 @@ export const industries = {
       kicker: "Conferences & Expos",
       title: "Badge & Pass Printing for Events",
       body:
-        "High-volume event badges, delegate passes and branded lanyards produced through the same standardized IvyPrints workflow—fast turnaround with order-level tracking.",
+        "High-volume event badges, delegate passes and branded lanyards produced through the same standardized IDCARD workflow—fast turnaround with order-level tracking.",
       stats: [
         { value: "24Hrs", label: "Dispatch" },
         { value: "50+", label: "Cities" },
@@ -290,7 +290,7 @@ export const industries = {
 
 export const idCardFeatures = [
   { id: "rfid", label: "RFID", title: "RFID layer", body: "125kHz / 13.56MHz antenna and chip laminated inside the card body for access control and attendance.", pos: { x: -1, y: -0.6 } },
-  { id: "security", label: "Security", title: "Secure data handling", body: "Data validated in the IvyPrints platform before print; each card tracked at order level.", pos: { x: 1, y: -0.7 } },
+  { id: "security", label: "Security", title: "Secure data handling", body: "Data validated in the IDCARD platform before print; each card tracked at order level.", pos: { x: 1, y: -0.7 } },
   { id: "design", label: "Custom Design", title: "Card artwork", body: "Choose from 250+ design templates or supply institution branding. Edge-to-edge print.", pos: { x: -1.15, y: 0.15 } },
   { id: "pvc", label: "PVC", title: "0.76mm PVC", body: "Quality-checked PVC sheets, laminated to a standard 0.76mm card thickness.", pos: { x: 1.15, y: 0.1 } },
   { id: "nfc", label: "NFC", title: "NFC option", body: "Tap-enabled smart cards for contactless identification and access.", pos: { x: -0.85, y: 0.85 } },
@@ -305,8 +305,8 @@ export const proofStats = [
 
 export const faqs = [
   {
-    q: "What makes IVYPrints different from other printing companies?",
-    a: "IvyPrints is not a single print shop. It is a B2B ecosystem connecting quality-checked raw materials, in-house order and plant software, a pan-India production partner network and a standardized quality-control and fulfilment process—so bulk printing can be managed transparently at scale.",
+    q: "What makes IDCARD different from other printing companies?",
+    a: "IDCARD is not a single print shop. It is a B2B ecosystem connecting quality-checked raw materials, in-house order and plant software, a pan-India production partner network and a standardized quality-control and fulfilment process—so bulk printing can be managed transparently at scale.",
   },
   {
     q: "Are there any eco-friendly printing options available?",
@@ -317,12 +317,12 @@ export const faqs = [
     a: "Yes. Samples can be arranged before a bulk order so you can verify material, print quality and finish. Share your requirement through the contact form and our team will coordinate.",
   },
   {
-    q: "What payment methods does IVYPrints accept?",
+    q: "What payment methods does IDCARD accept?",
     a: "We support standard business payment methods including bank transfer and UPI. Payment terms for partners and bulk orders are confirmed at onboarding.",
   },
   {
     q: "What if I have specific design requirements or need assistance with my order?",
-    a: "Our team assists with artwork, data formatting and product selection. Describe your requirement in the inquiry form or call +91 8302801966 and we will help you set up the order.",
+    a: "Our team assists with artwork, data formatting and product selection. Describe your requirement in the inquiry form or call +91 00000 00000 and we will help you set up the order.",
   },
 ];
 
@@ -387,5 +387,5 @@ export const footer = {
     { label: "Privacy Policy", href: "#" },
     { label: "Terms and Conditions", href: "#" },
   ],
-  copyright: "© 2026 IVYPrints - ID Card & Lanyard Printing Services. All rights reserved.",
+  copyright: "© 2026 IDCARD - ID Card & Lanyard Printing Services. All rights reserved.",
 };

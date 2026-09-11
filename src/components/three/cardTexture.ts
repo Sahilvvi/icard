@@ -3,10 +3,10 @@ import * as THREE from "three";
 export type CardPalette = { band: string; accent: string; label: string; name: string; role: string };
 
 export const PALETTES: Record<string, CardPalette> = {
-  purple: { band: "#5b3fd1", accent: "#ff7a45", label: "IVYPRINTS", name: "A. SHARMA", role: "STUDENT" },
-  charcoal: { band: "#232028", accent: "#ff7a45", label: "IVYPRINTS", name: "R. MEHTA", role: "STAFF" },
-  coral: { band: "#ff7a45", accent: "#5b3fd1", label: "IVYPRINTS", name: "DELEGATE", role: "EVENT" },
-  ivory: { band: "#efe7d8", accent: "#5b3fd1", label: "IVYPRINTS", name: "VISITOR", role: "PASS" },
+  purple: { band: "#5b3fd1", accent: "#ff7a45", label: "IDCARD", name: "A. SHARMA", role: "STUDENT" },
+  charcoal: { band: "#232028", accent: "#ff7a45", label: "IDCARD", name: "R. MEHTA", role: "STAFF" },
+  coral: { band: "#ff7a45", accent: "#5b3fd1", label: "IDCARD", name: "DELEGATE", role: "EVENT" },
+  ivory: { band: "#efe7d8", accent: "#5b3fd1", label: "IDCARD", name: "VISITOR", role: "PASS" },
 };
 
 /** Paints a CR80 card face onto a canvas and returns it as a texture. */
@@ -53,7 +53,7 @@ export function makeCardTexture(p: CardPalette, chip = false): THREE.CanvasTextu
   ctx.fill();
   ctx.fillStyle = "#4b4750";
   ctx.font = "400 20px 'IBM Plex Mono', monospace";
-  ctx.fillText("IVY-2026-0418", 40, h * 0.26 + 452);
+  ctx.fillText("IDC-2026-0418", 40, h * 0.26 + 452);
 
   // barcode
   ctx.fillStyle = "rgba(22,20,26,0.75)";

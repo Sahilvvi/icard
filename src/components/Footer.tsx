@@ -27,10 +27,10 @@ export function Footer() {
             </div>
 
             {/* map treatment: stylised India location grid */}
-            <div aria-label="Map: Jaipur, Rajasthan" className="mt-8 grid-bg relative h-32 w-full max-w-sm overflow-hidden rounded-lg border border-ivory/15 opacity-90 [--grid-color:rgba(246,241,231,0.08)]">
+            <div aria-label="Map: New Delhi, India" className="mt-8 grid-bg relative h-32 w-full max-w-sm overflow-hidden rounded-lg border border-ivory/15 opacity-90 [--grid-color:rgba(246,241,231,0.08)]">
               <span className="absolute left-[36%] top-[44%] size-2.5 rounded-full bg-coral shadow-[0_0_0_8px_rgba(255,122,69,0.2)]" />
               <span className="absolute left-[36%] top-[44%] size-2.5 animate-ping rounded-full bg-coral opacity-60" />
-              <span className="micro absolute bottom-3 left-3 text-ivory/60">Jaipur · 26.9°N 75.8°E</span>
+              <span className="micro absolute bottom-3 left-3 text-ivory/60">New Delhi · 28.6°N 77.2°E</span>
               <span className="micro absolute right-3 top-3 text-ivory/40">{site.location}</span>
             </div>
           </div>
@@ -72,7 +72,7 @@ export function Footer() {
         </div>
       </div>
       <p aria-hidden className="pointer-events-none select-none px-4 pb-2 text-center font-display text-[16vw] font-bold leading-[0.8] tracking-[-0.06em] text-ivory/[0.05]">
-        IVYPRINTS
+        IDCARD
       </p>
     </footer>
   );
