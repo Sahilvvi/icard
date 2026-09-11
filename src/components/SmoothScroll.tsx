@@ -48,9 +48,20 @@ export function SmoothScroll() {
 
     const refresh = () => ScrollTrigger.refresh();
     const t = window.setTimeout(refresh, 400);
+    window.addEventListener("load", refresh);
+    document.fonts?.ready.then(refresh);
+    const onLoaded = new MutationObserver(() => {
+      if (document.documentElement.classList.contains("is-loaded")) {
+        refresh();
+        onLoaded.disconnect();
+      }
+    });
+    onLoaded.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
 
     return () => {
       window.clearTimeout(t);
+      window.removeEventListener("load", refresh);
+      onLoaded.disconnect();
       document.removeEventListener("click", onClick);
       gsap.ticker.remove(tick);
       lenis.destroy();

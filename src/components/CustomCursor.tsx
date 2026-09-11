@@ -66,16 +66,15 @@ export function CustomCursor() {
       <div
         ref={dot}
         aria-hidden
-        className="pointer-events-none fixed left-0 top-0 z-[90] size-[6px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-ink mix-blend-difference"
-        style={{ background: "#fff" }}
+        className="pointer-events-none fixed left-0 top-0 z-[90] size-[6px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-coral"
       />
       <div
         ref={ring}
         aria-hidden
-        className="pointer-events-none fixed left-0 top-0 z-[90] flex size-9 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white mix-blend-difference"
+        className="pointer-events-none fixed left-0 top-0 z-[90] flex size-9 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-coral/80 bg-ink/5"
       >
-        <span className={`micro text-white transition-opacity duration-200 ${mode === "view" ? "opacity-100" : "opacity-0"}`}>View</span>
-        <span className={`absolute inset-0 flex items-center justify-between px-3 text-white transition-opacity duration-200 ${mode === "drag" ? "opacity-100" : "opacity-0"}`}>
+        <span className={`micro text-coral transition-opacity duration-200 ${mode === "view" ? "opacity-100" : "opacity-0"}`}>View</span>
+        <span className={`absolute inset-0 flex items-center justify-between px-3 text-coral transition-opacity duration-200 ${mode === "drag" ? "opacity-100" : "opacity-0"}`}>
           <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden>
             <path d="M6 1 2 5l4 4" stroke="currentColor" strokeWidth="1.2" />
           </svg>

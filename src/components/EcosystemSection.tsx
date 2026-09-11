@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { ecosystem } from "@/lib/content";
-import { gsap, ScrollTrigger, useGsap } from "@/lib/motion";
+import { gsap, useGsap } from "@/lib/motion";
 import { AssetImage } from "./ui/AssetImage";
 import { SectionHeader } from "./ui/SectionHeader";
 
@@ -31,6 +31,8 @@ export function EcosystemSection() {
           start: "top top",
           end: () => `+=${window.innerHeight * (n + 0.4)}`,
           pin: stage,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
           scrub: reduced ? false : 0.6,
           onUpdate: (self) => {
             const idx = Math.min(n - 1, Math.floor(self.progress * n));
@@ -72,7 +74,6 @@ export function EcosystemSection() {
         scrollTrigger: { trigger: scope, start: "top 75%", once: true },
       });
     }
-    ScrollTrigger.refresh();
   }, []);
 
   const tone = TONES[pillars[active].tone];
@@ -84,7 +85,7 @@ export function EcosystemSection() {
       className="relative transition-[background-color,color] duration-700 ease-[var(--ease-in-out-quart)]"
       style={{ backgroundColor: tone.bg, color: tone.fg }}
     >
-      <div className="eco-stage relative lg:h-screen lg:overflow-hidden">
+      <div className="eco-stage relative transition-[background-color] duration-700 lg:h-screen lg:overflow-hidden" style={{ backgroundColor: tone.bg }}>
         <div className="container-x grid gap-10 pb-10 pt-20 sm:pt-28 lg:h-full lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-16 lg:pb-14">
           {/* Left: header + flow */}
           <div className="flex flex-col justify-between">

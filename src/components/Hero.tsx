@@ -7,7 +7,13 @@ import { gsap, ScrollTrigger, isDesktop, prefersReducedMotion, useClientValue, u
 import { Button } from "./ui/Button";
 import { IDCard } from "./ui/IDCard";
 
-const readWebgl = () => isDesktop() && !prefersReducedMotion();
+/** WebGL hero only on desktop, no reduced-motion, and hardware that can afford it. */
+const readWebgl = () => {
+  if (!isDesktop() || prefersReducedMotion()) return false;
+  const cores = navigator.hardwareConcurrency ?? 8;
+  const mem = (navigator as Navigator & { deviceMemory?: number }).deviceMemory ?? 8;
+  return cores > 4 && mem > 4;
+};
 const HeroScene = dynamic(() => import("./three/HeroScene"), { ssr: false });
 
 export function Hero() {

@@ -151,9 +151,9 @@ export default function HeroScene({ scroll }: { scroll: RefObject<number> }) {
   }, []);
 
   return (
-    <div ref={wrap} className="absolute inset-0">
+    <div ref={wrap} className="absolute inset-0" style={{ visibility: visible ? "visible" : "hidden" }}>
     <Canvas
-      dpr={[1, 1.25]}
+      dpr={1}
       frameloop={visible ? "always" : "never"}
       camera={{ position: [0, 0, 15], fov: 32 }}
       gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}

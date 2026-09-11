@@ -65,6 +65,7 @@ export function ProductCarousel() {
           start: "top top",
           end: () => `+=${getDist() * 1.1}`,
           pin: stage,
+          anticipatePin: 1,
           scrub: reduced ? true : 0.8,
           invalidateOnRefresh: true,
           onUpdate: (self) => {
@@ -117,7 +118,7 @@ export function ProductCarousel() {
 
   return (
     <section id="products" ref={scope} className="relative bg-ivory">
-      <div className="pc-stage relative lg:h-screen lg:overflow-hidden">
+      <div className="pc-stage relative bg-ivory lg:h-screen lg:overflow-hidden">
         <div className="container-x flex flex-col gap-6 pt-20 sm:pt-28 lg:h-[34vh] lg:flex-row lg:items-end lg:justify-between lg:pb-6">
           <SectionHeader label={products.label} index="03" title={products.title} accentLine={1} sub={products.sub} />
           <div className="micro flex items-center gap-4 text-graphite">
