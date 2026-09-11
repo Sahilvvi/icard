@@ -23,7 +23,7 @@ function ProductCard({ item, index }: { item: (typeof products.items)[number]; i
       data-cursor="view"
       onMouseMove={onMove}
       onMouseLeave={onLeave}
-      className="pc-card group relative w-[72vw] shrink-0 snap-center sm:w-[380px] lg:w-[400px] preserve-3d"
+      className="pc-card group relative w-[72vw] shrink-0 snap-center sm:w-[380px] lg:w-[min(400px,40vh)] preserve-3d"
     >
       <div className="card-surface crop relative overflow-hidden text-ink transition-shadow duration-500 group-hover:shadow-[0_30px_60px_-24px_rgba(22,20,26,0.45)]">
         <div className="relative aspect-[4/5] overflow-hidden bg-cream">
@@ -118,8 +118,8 @@ export function ProductCarousel() {
 
   return (
     <section id="products" ref={scope} className="relative bg-ivory">
-      <div className="pc-stage relative bg-ivory lg:h-screen lg:overflow-hidden">
-        <div className="container-x flex flex-col gap-6 pt-20 sm:pt-28 lg:h-[34vh] lg:flex-row lg:items-end lg:justify-between lg:pb-6">
+      <div className="pc-stage relative bg-ivory lg:flex lg:h-screen lg:flex-col lg:overflow-hidden">
+        <div className="container-x flex flex-col gap-6 pt-20 sm:pt-28 lg:shrink-0 lg:flex-row lg:items-end lg:justify-between lg:pb-4 lg:pt-24">
           <SectionHeader label={products.label} index="03" title={products.title} accentLine={1} sub={products.sub} />
           <div className="micro flex items-center gap-4 text-graphite">
             <span className="text-ink tabular-nums">{String(idx + 1).padStart(2, "0")}</span>
@@ -133,7 +133,7 @@ export function ProductCarousel() {
 
         <div
           data-cursor="drag"
-          className="pc-track no-scrollbar mt-8 flex snap-x snap-mandatory gap-5 overflow-x-auto px-5 pb-14 sm:gap-7 sm:px-8 lg:mt-0 lg:h-[66vh] lg:items-center lg:overflow-visible lg:px-14 lg:pb-0 xl:px-20"
+          className="pc-track no-scrollbar mt-8 flex snap-x snap-mandatory gap-5 overflow-x-auto px-5 pb-14 sm:gap-7 sm:px-8 lg:mt-0 lg:min-h-0 lg:flex-1 lg:items-center lg:overflow-visible lg:px-14 lg:pb-0 xl:px-20"
           style={{ perspective: "1200px" }}
         >
           {products.items.map((p, i) => (

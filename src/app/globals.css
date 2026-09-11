@@ -121,6 +121,22 @@
     clip-path: inset(0 0 100% 0);
   }
 
+  /* Pinned product stage on short laptop viewports: compact header so cards fit. */
+  @media (min-width: 64rem) and (max-height: 860px) {
+    .pc-stage .h-section {
+      font-size: clamp(2rem, 3.2vw, 3rem);
+    }
+    .pc-stage [data-reveal-group] {
+      gap: 0.875rem;
+    }
+    .pc-stage .lede {
+      display: none;
+    }
+    #hero-title {
+      font-size: clamp(2.25rem, 4.6vw, 4.25rem) !important;
+    }
+  }
+
   /* Print registration mark */
   .reg-mark {
     @apply relative block size-4;
