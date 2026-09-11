@@ -19,7 +19,6 @@ export function EcosystemSection() {
   const scope = useGsap<HTMLElement>(({ scope, reduced, mm }) => {
     mm.add("(min-width: 1024px)", () => {
       const panels = gsap.utils.toArray<HTMLElement>(".eco-panel", scope);
-      const stage = scope.querySelector<HTMLElement>(".eco-stage")!;
       const n = panels.length;
 
       gsap.set(panels, { clipPath: "inset(100% 0 0 0)" });
@@ -29,11 +28,9 @@ export function EcosystemSection() {
         scrollTrigger: {
           trigger: scope,
           start: "top top",
-          end: () => `+=${window.innerHeight * (n + 0.4)}`,
-          pin: stage,
-          anticipatePin: 1,
+          end: "bottom bottom",
           invalidateOnRefresh: true,
-          scrub: reduced ? false : 0.6,
+          scrub: reduced ? true : 0.6,
           onUpdate: (self) => {
             const idx = Math.min(n - 1, Math.floor(self.progress * n));
             setActive((a) => (a === idx ? a : idx));
@@ -82,10 +79,10 @@ export function EcosystemSection() {
     <section
       id="ecosystem"
       ref={scope}
-      className="relative transition-[background-color,color] duration-700 ease-[var(--ease-in-out-quart)]"
-      style={{ backgroundColor: tone.bg, color: tone.fg }}
+      className="relative transition-[background-color,color] duration-700 ease-[var(--ease-in-out-quart)] lg:h-[var(--eco-h)]"
+      style={{ backgroundColor: tone.bg, color: tone.fg, "--eco-h": `${(pillars.length + 1.4) * 100}vh` } as React.CSSProperties}
     >
-      <div className="eco-stage relative transition-[background-color] duration-700 lg:h-screen lg:overflow-hidden" style={{ backgroundColor: tone.bg }}>
+      <div className="eco-stage relative transition-[background-color] duration-700 lg:sticky lg:top-0 lg:h-screen lg:overflow-hidden" style={{ backgroundColor: tone.bg }}>
         <div className="container-x grid gap-10 pb-10 pt-20 sm:pt-28 lg:h-full lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-16 lg:pb-14">
           {/* Left: header + flow */}
           <div className="flex flex-col justify-between">

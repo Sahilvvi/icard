@@ -30,8 +30,8 @@ export function Product3DViewer() {
     if (!ring.current) return;
     gsap.to(ring.current, {
       rotateY: angle.current,
-      duration: prefersReducedMotion() ? 0 : 1.1,
-      ease: "elastic.out(1, 0.85)",
+      duration: prefersReducedMotion() ? 0.6 : 1.1,
+      ease: prefersReducedMotion() ? "power2.out" : "elastic.out(1, 0.85)",
     });
   };
 
@@ -54,7 +54,7 @@ export function Product3DViewer() {
   }, []);
 
   useEffect(() => {
-    if (paused || !inView || prefersReducedMotion()) return;
+    if (paused || !inView) return;
     const t = window.setInterval(() => rotateTo(active + 1), AUTOPLAY_MS);
     return () => window.clearInterval(t);
   }, [active, paused, inView]);

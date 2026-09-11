@@ -50,28 +50,9 @@ export function ProductCarousel() {
   const [idx, setIdx] = useState(0);
   const n = products.items.length;
 
-  const scope = useGsap<HTMLElement>(({ scope, reduced }) => {
+  const scope = useGsap<HTMLElement>(({ scope }) => {
     const track = scope.querySelector<HTMLElement>(".pc-track")!;
     const viewport = scope.querySelector<HTMLElement>(".pc-viewport")!;
-
-    if (reduced) {
-      const onScroll = () => {
-        const cards = gsap.utils.toArray<HTMLElement>(".pc-card", track).slice(0, n);
-        const cx = viewport.scrollLeft + viewport.clientWidth / 2;
-        let best = 0;
-        let bd = Infinity;
-        cards.forEach((c, i) => {
-          const d = Math.abs(c.offsetLeft + c.offsetWidth / 2 - cx);
-          if (d < bd) {
-            bd = d;
-            best = i;
-          }
-        });
-        setIdx(best);
-      };
-      viewport.addEventListener("scroll", onScroll, { passive: true });
-      return () => viewport.removeEventListener("scroll", onScroll);
-    }
 
     const loop = gsap.to(track, {
       xPercent: -50,
@@ -130,14 +111,14 @@ export function ProductCarousel() {
 
       <div
         data-cursor="view"
-        className="pc-viewport no-scrollbar mt-10 overflow-hidden motion-reduce:overflow-x-auto sm:mt-14"
+        className="pc-viewport mt-10 overflow-hidden sm:mt-14"
         style={{ perspective: "1200px" }}
         aria-roledescription="carousel"
         aria-label="Products"
       >
-        <div className="pc-track flex w-max motion-reduce:px-5 motion-reduce:sm:px-8">
+        <div className="pc-track flex w-max">
           {[0, 1].map((copy) => (
-            <div key={copy} className={copy ? "flex gap-5 pr-5 sm:gap-7 sm:pr-7 motion-reduce:hidden" : "flex gap-5 pr-5 sm:gap-7 sm:pr-7"} aria-hidden={copy === 1}>
+            <div key={copy} className="flex gap-5 pr-5 sm:gap-7 sm:pr-7" aria-hidden={copy === 1}>
               {products.items.map((p, i) => (
                 <ProductCard key={p.id} item={p} index={i} />
               ))}
