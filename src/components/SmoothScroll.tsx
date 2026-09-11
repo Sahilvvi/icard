@@ -19,10 +19,31 @@ export function scrollToHash(hash: string) {
 export function SmoothScroll() {
   useEffect(() => {
     registerGsap();
-    if (prefersReducedMotion()) {
+
+    const refresh = () => {
+      ScrollTrigger.sort();
       ScrollTrigger.refresh();
-      return;
+    };
+    const t = window.setTimeout(refresh, 400);
+    window.addEventListener("load", refresh);
+    document.fonts?.ready.then(refresh);
+    const onLoaded = new MutationObserver(() => {
+      if (document.documentElement.classList.contains("is-loaded")) {
+        refresh();
+        onLoaded.disconnect();
+      }
+    });
+    onLoaded.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+
+    if (prefersReducedMotion()) {
+      refresh();
+      return () => {
+        window.clearTimeout(t);
+        window.removeEventListener("load", refresh);
+        onLoaded.disconnect();
+      };
     }
+
     const lenis = new Lenis({
       lerp: 0.09,
       wheelMultiplier: 0.95,
@@ -45,18 +66,6 @@ export function SmoothScroll() {
       history.replaceState(null, "", hash);
     };
     document.addEventListener("click", onClick);
-
-    const refresh = () => ScrollTrigger.refresh();
-    const t = window.setTimeout(refresh, 400);
-    window.addEventListener("load", refresh);
-    document.fonts?.ready.then(refresh);
-    const onLoaded = new MutationObserver(() => {
-      if (document.documentElement.classList.contains("is-loaded")) {
-        refresh();
-        onLoaded.disconnect();
-      }
-    });
-    onLoaded.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
 
     return () => {
       window.clearTimeout(t);
